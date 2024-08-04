@@ -1,0 +1,9 @@
+# If the listeners should be enabled
+# The `/ced reload` command will be valid
+enable: true
+
+no-bed-damage: true
+
+buff-stages: true
+
+

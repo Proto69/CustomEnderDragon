@@ -1,0 +1,15 @@
+main: org.example.CustomEnderDragon
+name: "CustomEnderDragon"
+author: "Proto68"
+api-version: 1.21
+version: 1.0
+
+commands:
+  ced:
+    description: Base command for the CED plugin.
+    usage: /<command> <subcommand>
+
+permissions:
+  ced.reload:
+    description: Allows the user to reload the CustomEnderDragon configuration.
+    default: op
