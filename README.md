@@ -2,6 +2,9 @@
 ### A minecraft plugin that changes the final battle!
 >Feel free to alter the code of this plugin to your needs
 
+> [!IMPORTANT]
+> The plugin is tested only on 1.21 Paper
+
 ## Features
 > [!TIP]
 > Most of the features are customizable or could be disabled.
