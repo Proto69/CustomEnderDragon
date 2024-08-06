@@ -7,6 +7,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class EndCrystalBreakListener implements Listener {
@@ -18,14 +21,29 @@ public class EndCrystalBreakListener implements Listener {
     @EventHandler
     public void onExplosionPrime(ExplosionPrimeEvent event) {
 
-        if (Objects.equals(UsefulMethods.readConfig("end-crystal-explode-title.enabled"), "true")) {
-            // Check if the explosion is caused by an Ender Crystal
-            if (event.getEntity() instanceof EnderCrystal enderCrystal) {
+        // Check if the explosion is caused by an Ender Crystal
+        if (event.getEntity() instanceof EnderCrystal enderCrystal) {
 
-                // Example: Broadcast to all players
-                for (Player player : Objects.requireNonNull(plugin.getServer().getWorld(UsefulMethods.readConfig("end-world-name"))).getPlayers()) {
-                    UsefulMethods.sendTitle(player, UsefulMethods.readConfig("end-crystal-explode-title.title"), UsefulMethods.readConfig("end-crystal-explode-title.subtitle"));
-                    player.getWorld().playSound(player.getLocation(), Sound.ITEM_TOTEM_USE, 1.0f, 1.0f);
+            int numberOfCrystalsLeft = event.getEntity().getWorld().getEntitiesByClass(EnderCrystal.class).size();
+
+            // Example: Broadcast to all players
+            for (Player player : Objects.requireNonNull(plugin.getServer().getWorld(UsefulMethods.readConfig("end-world-name"))).getPlayers()) {
+                if (Objects.equals(UsefulMethods.readConfig("end-crystal-explode.title.enable"), "true")) {
+
+                    String title = UsefulMethods.readConfig("end-crystal-explode.title.title");
+                    String subtitle = UsefulMethods.readConfig("end-crystal-explode.title.subtitle");
+
+                    Map<String, String> map = new HashMap<>();
+                    map.put("numberOfCrystalsLeft", Integer.toString(numberOfCrystalsLeft));
+                    map.put("numberOfCrystalsDestroyed", Integer.toString(10 - numberOfCrystalsLeft));
+
+                    title = UsefulMethods.replacePlaceholders(title, map);
+                    subtitle = UsefulMethods.replacePlaceholders(subtitle, map);
+
+                    UsefulMethods.sendTitle(player, title, subtitle);
+                }
+                if (Objects.equals(UsefulMethods.readConfig("end-crystal-explode.sound.enable"), "true")) {
+                    player.getWorld().playSound(player.getLocation(), Sound.ITEM_TOTEM_USE, Float.parseFloat(UsefulMethods.readConfig("end-crystal-explode.sound.volume")), Float.parseFloat(UsefulMethods.readConfig("end-crystal-explode.sound.pitch")));
                 }
             }
         }

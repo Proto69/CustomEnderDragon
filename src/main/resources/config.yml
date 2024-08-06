@@ -2,8 +2,120 @@
 # The `/ced reload` command will be valid
 enable: true
 
+# Whether the dragon should take damage from beds
 no-bed-damage: true
 
-buff-stages: true
+# The name of the end world where the dragon will be
+end-world-name: "world_the_end"
 
+# Dragon options when the PLAYER damages the DRAGON
+dragon:
+  # Whether if the dragon should receive potion effects
+  # They are: Regeneration (III) 2s & Resistance (IV) 2s
+  potion-effects: true
+  # Whether the dragon should fire a fireball to the player
+  fireball: true
+  # Whether red particles should be spawned around the dragon
+  particles: true
+  # When set to `false`, there will be 50% chance for the `fireball` and `potion-effects` to work
+  # When set to `true`, everything will work always
+  always: false
 
+# Player option when the PLAYER damages the DRAGON
+player:
+  # Whether a sound will be played around the player
+  sound: true
+  # Whether flame particles should be shown around the player
+  particles: true
+  # Whether the player should receive potion effects:
+  # Levitation (I) 3s & Blindness (I) 2s
+  potion-effects: true
+  # When set to `false`, there will be 50% chance for the `potion-effects` to work
+  # When set to `true`, everything will work always
+  always: false
+
+# Leaderboard options for when the dragon dies
+# Shows damage statistics for players
+leaderboard:
+  # Whether the leaderboard should be shown
+  enable: true
+  # How many players should be shown
+  player-count: "5"
+  # What the title of the leaderboard should be
+  message-title: "Top 5 players:"
+  # How every line for a player should look like
+  # Color codes like &2 &n are available
+  # Built-in placeholders:
+  # %number% -> shows the position of the player
+  # %player% -> shows the name of the player
+  # %damage% -> shows the damage dealt to the dragon
+  message-row: "&a%number%. &6%player% &7dealt &c%damage% &7damage to the dragon!"
+
+# Options for dragon abilities repeated in a specific interval
+abilities:
+  # Whether the dragon should have abilities
+  enable: true
+  # The period at which the ability will occur
+  period: 100
+  # The delay after ability occurs
+  delay: 0
+  # Potion effects applied to the players
+  # Effects are: Poison (I) 10s & Weakness (I) 1s
+  player-effects:
+    # Whether the effects should be applied
+    enable: true
+    # The radius in which the players will be affected
+    radius: 15
+  # Arrows shot at every player
+  arrows:
+    # Whether this option should work
+    enable: true
+    # The amount of arrows shot at every player
+    count: 5
+  # Dragon fireballs shot at every player
+  fireballs:
+    # Whether this option should work
+    enable: true
+    # The amount of fireballs shot at every player
+    count: 2
+
+# Settings for every shown title
+all-titles:
+  fade-in: 20
+  stay: 40
+  fade-out: 10
+
+# Options for buffing the dragon
+dragon-buff:
+  # Whether the dragon should be buffed
+  # On 75% health -> potion level I
+  # On 50% health -> potion level II
+  # On 25% health -> potion level III
+  enable: true
+  # The effects that the dragon will receive
+  effects: 'Strength, Speed'
+  # Title options
+  title:
+    # Whether a title should be shown to all players in the world
+    enable: true
+    # Color codes are available
+    title: "The dragon was &c&lbuffed&r!"
+    subtitle: "Now it's &c&lstronger&r!"
+
+# Events on destroying an end crystal
+end-crystal-explode:
+  # Title event
+  title:
+    # Whether a title should be shown
+    enable: true
+    # Color codes are available
+    # Built-in placeholders:
+    # %numberOfCrystalsLeft% -> the count of the remaining end crystals
+    # %numberOfCrystalsDestroyed% -> the count of destroyed end crystals
+    title: "A crystal has fallen!"
+    subtitle: "The dragon is weaker!"
+  # Sound event
+  sound:
+    enable: true
+    volume: 1.0
+    pitch: 1.0

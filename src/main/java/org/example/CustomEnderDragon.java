@@ -45,14 +45,11 @@ public class CustomEnderDragon extends JavaPlugin {
 
             String subCommand = args[0].toLowerCase();
 
-            switch (subCommand) {
-                case "reload":
-                    ReloadCommand reload = new ReloadCommand(this);
-                    reload.onCommand(sender, command, label, args);
-                    break;
-                default:
-                    sender.sendMessage("Unknown subcommand.");
-                    break;
+            if (subCommand.equals("reload")) {
+                ReloadCommand reload = new ReloadCommand(this);
+                reload.onCommand(sender, command, label, args);
+            } else {
+                sender.sendMessage("Unknown subcommand.");
             }
             return true;
         }
@@ -92,6 +89,8 @@ public class CustomEnderDragon extends JavaPlugin {
     }
 
     private void registerTasks(){
-        new AbilitiesTask().runTaskTimer(this, 0L, 100L);
+        if (Objects.equals(UsefulMethods.readConfig("abilities.enable"), "true")){
+            new AbilitiesTask().runTaskTimer(this, Long.parseLong(UsefulMethods.readConfig("abilities.delay")), Long.parseLong(UsefulMethods.readConfig("abilities.period")));
+        }
     }
 }
