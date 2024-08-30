@@ -74,12 +74,10 @@ public class DamageListener implements Listener {
 
                 damageMap.merge(player.getUniqueId(), event.getDamage(), Double::sum);
 
-                boolean chance = Objects.equals(UsefulMethods.readConfig("dragon.always"), "true");
-
-                Random random = new Random();
+                boolean chance = UsefulMethods.chance("dragon.chance");
 
                 if (Objects.equals(UsefulMethods.readConfig("dragon.potion-effects"), "true")) {
-                    if (random.nextBoolean() || chance) {
+                    if (chance) {
                         // Apply potion effects to the dragon
                         if (!dragon.hasPotionEffect(PotionEffectType.REGENERATION)) {
                             dragon.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 40, 3));
@@ -88,17 +86,19 @@ public class DamageListener implements Listener {
                     }
                 }
 
+                chance = UsefulMethods.chance("dragon.chance");
+
                 if (Objects.equals(UsefulMethods.readConfig("dragon.fireball"), "true")) {
-                    if (random.nextBoolean() || chance) {
+                    if (chance) {
                         // Shoot a dragon fireball
                         dragon.launchProjectile(DragonFireball.class);
                     }
                 }
 
-                chance = Objects.equals(UsefulMethods.readConfig("player.always"), "true");
+                chance = UsefulMethods.chance("player.chance");
 
                 if (Objects.equals(UsefulMethods.readConfig("player.potion-effects"), "true")) {
-                    if (random.nextBoolean() || chance) {
+                    if (chance) {
                         // Apply potion effects to the player
                         player.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 60, 1));
                         player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 1));

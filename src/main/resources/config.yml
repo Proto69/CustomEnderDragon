@@ -17,9 +17,8 @@ dragon:
   fireball: true
   # Whether red particles should be spawned around the dragon
   particles: true
-  # When set to `false`, there will be 50% chance for the `fireball` and `potion-effects` to work
-  # When set to `true`, everything will work always
-  always: false
+  # The chance in percentage if the actions should happen
+  chance: 50
 
 # Player option when the PLAYER damages the DRAGON
 player:
@@ -30,9 +29,8 @@ player:
   # Whether the player should receive potion effects:
   # Levitation (I) 3s & Blindness (I) 2s
   potion-effects: true
-  # When set to `false`, there will be 50% chance for the `potion-effects` to work
-  # When set to `true`, everything will work always
-  always: false
+  # The chance in percentage if the potion-effect should happen
+  chance: 50
 
 # Leaderboard options for when the dragon dies
 # Shows damage statistics for players
@@ -64,18 +62,24 @@ abilities:
   player-effects:
     # Whether the effects should be applied
     enable: true
+    # A chance for happening
+    chance: 75
     # The radius in which the players will be affected
     radius: 15
   # Arrows shot at every player
   arrows:
     # Whether this option should work
     enable: true
+    # A chance for happening
+    chance: 75
     # The amount of arrows shot at every player
     count: 5
   # Dragon fireballs shot at every player
   fireballs:
     # Whether this option should work
     enable: true
+    # A chance for happening
+    chance: 75
     # The amount of fireballs shot at every player
     count: 2
 

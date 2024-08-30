@@ -20,8 +20,10 @@ public class AbilitiesTask extends BukkitRunnable {
                 Location dragonLocation = dragon.getLocation();
                 Vector direction = playerLocation.toVector().subtract(dragonLocation.toVector()).normalize();
 
+                Boolean chance = UsefulMethods.chance("abilities.arrows.chance");
+
                 // Shoot an arrow at the player
-                if (Objects.equals(UsefulMethods.readConfig("abilities.arrows.enable"), "true")){
+                if (Objects.equals(UsefulMethods.readConfig("abilities.arrows.enable"), "true") && chance){
                     for (int i = 0; i < Integer.parseInt(UsefulMethods.readConfig("abilities.arrows.count")); i++){
                         Arrow arrow = dragon.launchProjectile(Arrow.class);
                         arrow.setShooter(dragon);
@@ -35,7 +37,9 @@ public class AbilitiesTask extends BukkitRunnable {
                     }
                 }
 
-                if (Objects.equals(UsefulMethods.readConfig("abilities.fireballs.enable"), "true")){
+                chance = UsefulMethods.chance("abilities.fireballs.chance");
+
+                if (Objects.equals(UsefulMethods.readConfig("abilities.fireballs.enable"), "true") && chance){
                     Vector baseDirection = direction.clone();  // Clone the base direction
 
                     // Adjustments for slight variations in direction
@@ -57,7 +61,9 @@ public class AbilitiesTask extends BukkitRunnable {
                     }
                 }
 
-                if (Objects.equals(UsefulMethods.readConfig("abilities.player-effects.enable"), "true")){
+                chance = UsefulMethods.chance("abilities.player-effects.chance");
+
+                if (Objects.equals(UsefulMethods.readConfig("abilities.player-effects.enable"), "true") && chance){
                     int radius = Integer.parseInt(UsefulMethods.readConfig("abilities.player-effects.radius"));
                     // Apply potion effect to nearby players
                     for (Entity nearby : dragon.getNearbyEntities(radius, radius, radius)) {
